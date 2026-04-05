@@ -4,7 +4,7 @@ import { LayoutDashboard, Receipt, LineChart, Shield, Wallet, Menu, UserCircle, 
 import { useFinanceStore } from '../stores/financeStore';
 import ThemeToggle from './ThemeToggle';
 import clsx from 'clsx';
-import type { Role } from '../types';
+import type { Role } from '../types/index';
 
 const Layout = () => {
   const { role, setRole, user, logout, adminPassword, setAdminPassword, clearTransactions } = useFinanceStore();

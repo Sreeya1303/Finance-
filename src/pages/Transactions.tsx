@@ -3,7 +3,7 @@ import { Plus, Search, Filter, Pencil, Trash2 } from 'lucide-react';
 import { useFinanceStore } from '../stores/financeStore';
 import { format, parseISO } from 'date-fns';
 import TransactionModal from '../components/TransactionModal';
-import type { Transaction } from '../types';
+import type { Transaction } from '../types/index';
 
 const Transactions = () => {
   const { transactions, role, deleteTransaction } = useFinanceStore();

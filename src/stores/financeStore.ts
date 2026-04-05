@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { FinanceState, Transaction } from '../types';
+import type { FinanceState, Transaction } from '../types/index';
 
 
 export const useFinanceStore = create<FinanceState>()(

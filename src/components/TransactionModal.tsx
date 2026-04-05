@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { useFinanceStore } from '../stores/financeStore';
-import type { Transaction, TransactionType } from '../types';
+import type { Transaction, TransactionType } from '../types/index';
 
 interface Props {
   isOpen: boolean;
