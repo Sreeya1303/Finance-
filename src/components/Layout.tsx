@@ -1,13 +1,13 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { LayoutDashboard, Receipt, LineChart, Shield, Wallet, Menu, UserCircle, LogOut, KeyRound } from 'lucide-react';
+import { LayoutDashboard, Receipt, LineChart, Shield, Wallet, Menu, UserCircle, LogOut, KeyRound, Trash2 } from 'lucide-react';
 import { useFinanceStore } from '../stores/financeStore';
 import ThemeToggle from './ThemeToggle';
 import clsx from 'clsx';
 import type { Role } from '../types';
 
 const Layout = () => {
-  const { role, setRole, user, logout, adminPassword, setAdminPassword } = useFinanceStore();
+  const { role, setRole, user, logout, adminPassword, setAdminPassword, clearTransactions } = useFinanceStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -107,6 +107,17 @@ const Layout = () => {
             <KeyRound size={16} className="text-primary" /> Change Admin Key
           </button>
         )}
+
+        <button
+          onClick={() => {
+            if (window.confirm('Are you sure you want to clear all transactions? This will reset your dashboard to zero.')) {
+              clearTransactions();
+            }
+          }}
+          className="w-full mb-2 flex items-center justify-center gap-2 px-4 py-2 border border-border rounded-lg text-sm font-medium text-text hover:bg-expense/5 hover:text-expense hover:border-expense/20 transition-colors"
+        >
+          <Trash2 size={16} /> Reset Dashboard
+        </button>
 
         <button
           onClick={() => logout()}

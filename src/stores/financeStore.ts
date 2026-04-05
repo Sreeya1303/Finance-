@@ -2,43 +2,11 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { FinanceState, Transaction } from '../types';
 
-const generateMockTransactions = (): Transaction[] => {
-  const categories = ['Groceries', 'Rent', 'Utilities', 'Entertainment', 'Salary', 'Freelance', 'Dining', 'Transport'];
-  const transactions: Transaction[] = [];
-  const today = new Date();
-
-  // Generate 50 mock transactions spread over the last 3 months
-  for (let i = 0; i < 50; i++) {
-    const isIncome = Math.random() > 0.8; 
-    const category = isIncome 
-      ? (Math.random() > 0.5 ? 'Salary' : 'Freelance')
-      : categories[Math.floor(Math.random() * 8)];
-      
-    // Skip putting expense categories on income
-    if (isIncome && category !== 'Salary' && category !== 'Freelance') continue;
-    if (!isIncome && (category === 'Salary' || category === 'Freelance')) continue;
-
-    const daysAgo = Math.floor(Math.random() * 90);
-    const date = new Date(today.getTime() - daysAgo * 24 * 60 * 60 * 1000).toISOString();
-    
-    transactions.push({
-      id: Math.random().toString(36).substr(2, 9),
-      date,
-      amount: isIncome ? Math.floor(Math.random() * 3000) + 500 : Math.floor(Math.random() * 200) + 10,
-      category,
-      type: isIncome ? 'Income' : 'Expense',
-      description: `Mock ${category} transaction`,
-    });
-  }
-
-  // Sort by date descending
-  return transactions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-};
 
 export const useFinanceStore = create<FinanceState>()(
   persist(
     (set) => ({
-      transactions: generateMockTransactions(),
+      transactions: [],
       role: 'Viewer',
       theme: 'dark',
       isAuthenticated: false,
@@ -73,7 +41,8 @@ export const useFinanceStore = create<FinanceState>()(
       register: (name, email) => 
         set({ isAuthenticated: true, user: { name, email } }),
       logout: () => 
-        set({ isAuthenticated: false, user: null })
+        set({ isAuthenticated: false, user: null }),
+      clearTransactions: () => set({ transactions: [] })
     }),
     {
       name: 'finance-storage',

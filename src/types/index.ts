@@ -32,4 +32,5 @@ export interface FinanceState {
   login: (email: string, name?: string) => void;
   register: (name: string, email: string) => void;
   logout: () => void;
+  clearTransactions: () => void;
 }
