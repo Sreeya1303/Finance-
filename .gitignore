@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Output/Log files from this project
+ts_errors.txt
+vite_err.txt
+vite_err_cmd.txt
+
